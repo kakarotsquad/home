@@ -167,6 +167,70 @@
       color: #888;
       padding: 1.5rem 1rem 2rem;
     }
+
+    .roadmap-box {
+      max-height: 220px;
+      overflow-y: auto;
+      text-align: left;
+      padding-right: 10px;
+    }
+
+    .fun-roadmap {
+      list-style: none;
+      padding: 0;
+      font-size: 0.7rem;
+    }
+
+    .fun-roadmap li {
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 1.4rem;
+    }
+
+    .fun-roadmap li span {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .bar {
+      height: 6px;
+      border-radius: 10px;
+      margin-top: 5px;
+      background: #333;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      animation: fillBar 2s forwards;
+    }
+
+    .bar.done::before {
+      background: #00ff88;
+      width: 100%;
+    }
+
+    .bar.in-progress::before {
+      background: #facc15;
+      width: 60%;
+    }
+
+    .bar.future::before {
+      background: #555;
+      width: 20%;
+    }
+
+    @keyframes fillBar {
+      from { width: 0; }
+      to { width: inherit; }
+    }
   </style>
 </head>
 <body>
@@ -207,13 +271,22 @@
 
     <div class="section">
       <h2>🗺️ Roadmap</h2>
-      <ul>
-        <li>✅ Launch $KAKAROT</li>
-        <li>✅ Build Community on Telegram + Twitter</li>
-        <li>🔜 Listing on DEXTools & CoinGecko</li>
-        <li>🔜 Meme Contest & NFT Drop</li>
-        <li>🔜 Saiyan Staking Dojo</li>
-      </ul>
+      <div class="roadmap-box">
+        <ul class="fun-roadmap">
+          <li><span>✅</span> Launch $KAKAROT – Goku screamed, blockchain answered. <div class="bar done"></div></li>
+          <li><span>✅</span> Website Live – Powered by pure Saiyan coding. <div class="bar done"></div></li>
+          <li><span>✅</span> Telegram On Fire – The Kakarot Clan has awakened. <div class="bar done"></div></li>
+          <li><span>✅</span> Contract Renounced – Freeza can’t touch this. <div class="bar done"></div></li>
+          <li><span>🚀</span> DEXTools & CoinGecko Listings – Kamehame-HYPE. <div class="bar in-progress"></div></li>
+          <li><span>🎭</span> Meme Contest – Winner gets a Senzu Bean. <div class="bar in-progress"></div></li>
+          <li><span>🎨</span> NFT Drop – Shirtless Goku (for culture). <div class="bar future"></div></li>
+          <li><span>🎮</span> Kamehameha Game – Press F to power up. <div class="bar future"></div></li>
+          <li><span>🐦</span> Elon Musk Tweet – Saiyan-level marketing. <div class="bar future"></div></li>
+          <li><span>👘</span> Cosplay Tournament – Real screams, digital glory. <div class="bar future"></div></li>
+          <li><span>📈</span> CEX Listings – Binance or bust. <div class="bar future"></div></li>
+          <li><span>🌕</span> Moon Mission – Goku’s already there. Now it's our turn. <div class="bar future"></div></li>
+        </ul>
+      </div>
     </div>
 
     <div class="socials">
