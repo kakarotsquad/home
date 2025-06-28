@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>$KAKAROT – Unleash the Saiyan Spirit</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;800&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -12,11 +14,55 @@
       box-sizing: border-box;
     }
 
-    body, html {
+    html, body {
+      height: 100%;
       font-family: 'Rubik', sans-serif;
       background-color: #000;
       color: white;
       overflow-x: hidden;
+    }
+
+    #loading-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: #facc15;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      z-index: 9999;
+      animation: fadeOut 2s forwards;
+      animation-delay: 2s;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .super-saiyan {
+      background-color: #222;
+      color: #ffed4d;
+      transition: all 0.5s ease;
+    }
+
+    .super-saiyan .btn {
+      background-color: #facc15 !important;
+      color: black;
+      box-shadow: 0 0 12px #facc15;
+    }
+
+    .super-saiyan .section {
+      box-shadow: 0 0 25px #facc15aa;
+    }
+
+    .super-saiyan h1, .super-saiyan h2 {
+      color: #ffe600;
     }
 
     .marquee-container {
@@ -25,9 +71,12 @@
       white-space: nowrap;
       background: #00ff88;
       color: #000;
-      font-size: 0.6rem;
-      padding: 0.4rem 0;
-      box-shadow: 0 0 8px #00ff88;
+      font-size: 0.65rem;
+      padding: 0.5rem 0;
+      box-shadow: 0 0 10px #00ff88;
+      z-index: 1000;
+      position: relative;
+      font-weight: bold;
     }
 
     .marquee-text {
@@ -42,185 +91,147 @@
     }
 
     main {
-      padding: 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
       text-align: center;
-      max-width: 600px;
-      margin: auto;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .hero {
       width: 100%;
-      max-width: 400px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #00ff88;
-      margin: 1.2rem auto;
+      max-width: 600px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #00ff88;
+      margin-bottom: 1.5rem;
     }
 
     h1 {
       color: #facc15;
-      font-size: 1.3rem;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
       font-weight: 800;
-      margin-bottom: 1rem;
     }
 
     p {
-      font-size: 0.7rem;
-      line-height: 1.4;
-      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
     }
 
     .btn {
       background-color: #8a2be2;
       color: #fff;
-      padding: 0.6rem 1rem;
-      font-size: 0.6rem;
-      margin: 0.4rem;
-      border: none;
-      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      margin: 0.5rem;
+      display: inline-block;
       text-decoration: none;
       font-weight: bold;
-      display: inline-block;
-      transition: transform 0.2s ease;
-      box-shadow: 0 0 10px #8a2be2;
+      transition: transform 0.2s ease, background 0.2s ease;
+      box-shadow: 0 0 12px #8a2be2;
     }
 
     .btn:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
       background-color: #9b30ff;
     }
 
     .section {
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      width: 90%;
       background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      padding: 1rem;
-      margin-top: 1.5rem;
-      box-shadow: 0 0 15px #8a2be2aa;
+      border-radius: 14px;
+      box-shadow: 0 0 20px #8a2be2aa;
     }
 
     .section h2 {
-      font-size: 0.9rem;
       color: #facc15;
-      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
     }
 
-    .section p,
-    .section ul {
-      font-size: 0.65rem;
+    .section p, .section ul {
+      font-size: 0.7rem;
+    }
+
+    .history-box {
+      max-height: 200px;
+      overflow-y: auto;
+      padding-right: 10px;
       text-align: left;
     }
 
+    .scroll-box {
+      max-height: 160px;
+      overflow-y: auto;
+      text-align: left;
+      padding-right: 10px;
+    }
+
     ul {
-      padding-left: 1rem;
+      list-style: none;
+      padding-left: 0;
     }
 
     li::before {
       content: "🔥 ";
     }
 
-    .history-box {
-      max-height: 140px;
-      overflow-y: auto;
-      padding-right: 6px;
-    }
-
-    .roadmap-box {
-      max-height: 180px;
-      overflow-y: auto;
-      padding-right: 6px;
-      text-align: left;
-    }
-
-    .fun-roadmap {
-      list-style: none;
-      padding: 0;
-      font-size: 0.65rem;
-    }
-
-    .fun-roadmap li {
-      margin-bottom: 0.8rem;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-
-    .fun-roadmap li span {
-      position: absolute;
-      left: 0;
-    }
-
-    .bar {
-      height: 5px;
-      border-radius: 6px;
-      margin-top: 4px;
-      background: #333;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .bar::before {
-      content: '';
-      position: absolute;
-      height: 100%;
-      top: 0;
-      left: 0;
-    }
-
-    .bar.done::before {
-      width: 100%;
-      background: #00ff88;
-    }
-
-    .bar.in-progress::before {
-      width: 60%;
-      background: #facc15;
-    }
-
-    .bar.future::before {
-      width: 20%;
-      background: #666;
-    }
-
     .socials {
-      margin-top: 1.2rem;
+      margin-top: 2rem;
       display: flex;
-      gap: 14px;
+      gap: 20px;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .socials img {
-      width: 30px;
-      height: 30px;
+      width: 36px;
+      height: 36px;
       background: #facc15;
-      border-radius: 5px;
-      padding: 4px;
-      filter: drop-shadow(0 0 5px #facc15);
+      padding: 6px;
+      border-radius: 6px;
       transition: transform 0.2s ease;
+      filter: drop-shadow(0 0 6px #facc15);
     }
 
     .socials img:hover {
-      transform: scale(1.1);
+      transform: scale(1.2);
+    }
+
+    .partners {
+      margin-top: 3rem;
     }
 
     footer {
-      font-size: 0.5rem;
-      color: #aaa;
-      margin: 1.5rem 0;
+      text-align: center;
+      font-size: 0.55rem;
+      color: #888;
+      padding: 1.5rem 1rem 2rem;
     }
   </style>
 </head>
 <body>
+  <div id="loading-screen">⚡ Powering up...</div>
 
   <div class="marquee-container">
-    <div class="marquee-text">$KAKAROT $KAKAROT $KAKAROT $KAKAROT $KAKAROT</div>
+    <div class="marquee-text">$KAKAROT $KAKAROT $KAKAROT $KAKAROT $KAKAROT $KAKAROT</div>
   </div>
 
   <main>
-    <img src="be70ec86fc53e267f668fc1815f6e1fe.jpg" alt="$KAKAROT" class="hero">
-
+    <img src="be70ec86fc53e267f668fc1815f6e1fe.jpg" alt="$KAKAROT Hero" class="hero">
     <h1>$KAKAROT</h1>
     <p>🔥 The Legend of the Saiyan Begins!<br>Join the Kakarot Clan. Become a meme warrior in the crypto universe.</p>
 
     <a href="https://t.me/kamecoinsquad" class="btn" target="_blank">Join Telegram</a>
-    <button onclick="document.getElementById('dbzSound').play()" class="btn">💥 Power Up!</button>
+    <button onclick="playSound()" class="btn">💥 Power Up!</button>
+    <button onclick="toggleSaiyan()" class="btn">⚡ Super Saiyan Mode</button>
 
     <audio id="dbzSound">
       <source src="over9000.mp3" type="audio/mpeg">
@@ -239,28 +250,26 @@
     <div class="section">
       <h2>📊 Tokenomics</h2>
       <ul>
-        <li>Total Supply: 59,000,000,000,000,000,000 $KAKAROT</li>
-        <li>100% Community Owned</li>
-        <li>LP Burned, Contract Renounced</li>
+        <li>Total Supply: Over 9000... Trillion!</li>
+        <li>100% Community Owned (like the spirit bomb — everyone contributes)</li>
+        <li>LP Burned harder than Vegeta's pride</li>
+        <li>Contract Renounced — no one’s in control, not even Frieza</li>
       </ul>
     </div>
 
     <div class="section">
       <h2>🗺️ Roadmap</h2>
-      <div class="roadmap-box">
-        <ul class="fun-roadmap">
-          <li><span>✅</span> Launch $KAKAROT – Goku screamed, blockchain answered. <div class="bar done"></div></li>
-          <li><span>✅</span> Website Live – Powered by pure Saiyan coding. <div class="bar done"></div></li>
-          <li><span>✅</span> Telegram On Fire – The Kakarot Clan has awakened. <div class="bar done"></div></li>
-          <li><span>✅</span> Contract Renounced – Freeza can’t touch this. <div class="bar done"></div></li>
-          <li><span>🚀</span> DEXTools & CoinGecko Listings – Kamehame-HYPE. <div class="bar in-progress"></div></li>
-          <li><span>🎭</span> Meme Contest – Winner gets a Senzu Bean. <div class="bar in-progress"></div></li>
-          <li><span>🎨</span> NFT Drop – Shirtless Goku (for culture). <div class="bar future"></div></li>
-          <li><span>🎮</span> Kamehameha Game – Press F to power up. <div class="bar future"></div></li>
-          <li><span>🐦</span> Elon Musk Tweet – Saiyan-level marketing. <div class="bar future"></div></li>
-          <li><span>👘</span> Cosplay Tournament – Real screams, digital glory. <div class="bar future"></div></li>
-          <li><span>📈</span> CEX Listings – Binance or bust. <div class="bar future"></div></li>
-          <li><span>🌕</span> Moon Mission – Goku’s already there. Now it's our turn. <div class="bar future"></div></li>
+      <div class="scroll-box">
+        <ul>
+          <li>✅ Launch $KAKAROT with a Kamehameha</li>
+          <li>✅ Form the Saiyan Squad on Telegram & Twitter</li>
+          <li>🔜 Listing on DEXTools & CoinGecko (we're flying there on Nimbus)</li>
+          <li>🔜 Meme War Tournament: May the best shitpost win</li>
+          <li>🔜 NFT Drop – Each one blessed by King Kai</li>
+          <li>🔜 Saiyan Staking Dojo (Train. Earn. Ascend.)</li>
+          <li>🔜 $KAKAROT Power Level Tracker (Spoiler: It's over 9000)</li>
+          <li>🔜 Global $KAKAROT Meetup (cosplay 100% encouraged)</li>
+          <li>🔜 Fusion Partnerships – stronger together</li>
         </ul>
       </div>
     </div>
@@ -274,9 +283,29 @@
       </a>
     </div>
 
-    <footer>
-      Made with 💛 by the $KAKAROT Dojo
-    </footer>
+    <div class="partners">
+      <p style="font-size: 0.55rem; color: #facc15;">🤝 Partnered with <a href="https://dxsale.network" target="_blank" style="color: #00ff88; text-decoration: none; font-weight: bold;">DxSale</a></p>
+    </div>
   </main>
+
+  <footer>
+    Made with 💛 by the $KAKAROT Dojo
+  </footer>
+
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loading-screen").style.display = "none";
+      }, 2000);
+    });
+
+    function playSound() {
+      document.getElementById('dbzSound').play();
+    }
+
+    function toggleSaiyan() {
+      document.body.classList.toggle("super-saiyan");
+    }
+  </script>
 </body>
 </html>
