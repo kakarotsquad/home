@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>$KAKAROT – Unleash the Saiyan Spirit</title>
 
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;800&display=swap" rel="stylesheet">
 
   <style>
@@ -14,55 +15,12 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    body, html {
       height: 100%;
       font-family: 'Rubik', sans-serif;
       background-color: #000;
       color: white;
       overflow-x: hidden;
-    }
-
-    #loading-screen {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      color: #facc15;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      z-index: 9999;
-      animation: fadeOut 2s forwards;
-      animation-delay: 2s;
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-
-    .super-saiyan {
-      background-color: #222;
-      color: #ffed4d;
-      transition: all 0.5s ease;
-    }
-
-    .super-saiyan .btn {
-      background-color: #facc15 !important;
-      color: black;
-      box-shadow: 0 0 12px #facc15;
-    }
-
-    .super-saiyan .section {
-      box-shadow: 0 0 25px #facc15aa;
-    }
-
-    .super-saiyan h1, .super-saiyan h2 {
-      color: #ffe600;
     }
 
     .marquee-container {
@@ -156,22 +114,17 @@
       margin-bottom: 1rem;
     }
 
-    .section p, .section ul {
+    .section p,
+    .section ul {
       font-size: 0.7rem;
     }
 
-    .history-box {
+    .history-box,
+    .roadmap-box {
       max-height: 200px;
       overflow-y: auto;
       padding-right: 10px;
       text-align: left;
-    }
-
-    .scroll-box {
-      max-height: 160px;
-      overflow-y: auto;
-      text-align: left;
-      padding-right: 10px;
     }
 
     ul {
@@ -218,8 +171,6 @@
   </style>
 </head>
 <body>
-  <div id="loading-screen">⚡ Powering up...</div>
-
   <div class="marquee-container">
     <div class="marquee-text">$KAKAROT $KAKAROT $KAKAROT $KAKAROT $KAKAROT $KAKAROT</div>
   </div>
@@ -231,7 +182,6 @@
 
     <a href="https://t.me/kamecoinsquad" class="btn" target="_blank">Join Telegram</a>
     <button onclick="playSound()" class="btn">💥 Power Up!</button>
-    <button onclick="toggleSaiyan()" class="btn">⚡ Super Saiyan Mode</button>
 
     <audio id="dbzSound">
       <source src="over9000.mp3" type="audio/mpeg">
@@ -250,26 +200,27 @@
     <div class="section">
       <h2>📊 Tokenomics</h2>
       <ul>
-        <li>Total Supply: Over 9000... Trillion!</li>
-        <li>100% Community Owned (like the spirit bomb — everyone contributes)</li>
-        <li>LP Burned harder than Vegeta's pride</li>
-        <li>Contract Renounced — no one’s in control, not even Frieza</li>
+        <li>💥 Total Supply: 59,000,000,000,000,000,000 $KAKAROT (Yes. That’s 59 quintillion. Goku approves.)</li>
+        <li>👨‍👩‍👧‍👦 100% Community Owned – No dev wallet, no presale, no mercy</li>
+        <li>🔥 LP Burned – Like Vegeta’s pride</li>
+        <li>📝 Contract Renounced – No going back. We’re on Namek now.</li>
+        <li>🔁 Taxes: 2% Buy / 2% Sell – Keeps the dojo running and the scouters calibrated</li>
+        <li>🌕 Power Level: MAXED – Moon soon? Nah, let’s go Ultra Instinct</li>
       </ul>
     </div>
 
     <div class="section">
       <h2>🗺️ Roadmap</h2>
-      <div class="scroll-box">
+      <div class="roadmap-box">
         <ul>
-          <li>✅ Launch $KAKAROT with a Kamehameha</li>
-          <li>✅ Form the Saiyan Squad on Telegram & Twitter</li>
-          <li>🔜 Listing on DEXTools & CoinGecko (we're flying there on Nimbus)</li>
-          <li>🔜 Meme War Tournament: May the best shitpost win</li>
-          <li>🔜 NFT Drop – Each one blessed by King Kai</li>
-          <li>🔜 Saiyan Staking Dojo (Train. Earn. Ascend.)</li>
-          <li>🔜 $KAKAROT Power Level Tracker (Spoiler: It's over 9000)</li>
-          <li>🔜 Global $KAKAROT Meetup (cosplay 100% encouraged)</li>
-          <li>🔜 Fusion Partnerships – stronger together</li>
+          <li>✅ Launch $KAKAROT</li>
+          <li>✅ Build community (Telegram, Twitter... and your grandma's WhatsApp)</li>
+          <li>🔜 Listings on DEXTools & CoinGecko (so even normies can find us)</li>
+          <li>🔜 Meme Contest – Winner gets bragging rights & probably hair like Goku</li>
+          <li>🔜 NFT Drop – Collect your Saiyan forms (Ultra Rare: Bald Krillin)</li>
+          <li>🔜 Saiyan Staking Dojo – Train your bags. Watch them power up.</li>
+          <li>🔜 Kakarot Merch – Hoodies, mugs, and maybe a scouter 🔬</li>
+          <li>🔜 Final Form Reveal – Hint: it’s over 9000.</li>
         </ul>
       </div>
     </div>
@@ -293,18 +244,8 @@
   </footer>
 
   <script>
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.getElementById("loading-screen").style.display = "none";
-      }, 2000);
-    });
-
     function playSound() {
       document.getElementById('dbzSound').play();
-    }
-
-    function toggleSaiyan() {
-      document.body.classList.toggle("super-saiyan");
     }
   </script>
 </body>
