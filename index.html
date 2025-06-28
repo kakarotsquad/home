@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>$KAKAROT – Unleash the Saiyan Spirit</title>
-
-  <!-- Fonte moderna -->
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;800&display=swap" rel="stylesheet">
-
   <style>
     * {
       margin: 0;
@@ -16,7 +13,6 @@
     }
 
     body, html {
-      height: 100%;
       font-family: 'Rubik', sans-serif;
       background-color: #000;
       color: white;
@@ -29,12 +25,9 @@
       white-space: nowrap;
       background: #00ff88;
       color: #000;
-      font-size: 0.65rem;
-      padding: 0.5rem 0;
-      box-shadow: 0 0 10px #00ff88;
-      z-index: 1000;
-      position: relative;
-      font-weight: bold;
+      font-size: 0.6rem;
+      padding: 0.4rem 0;
+      box-shadow: 0 0 8px #00ff88;
     }
 
     .marquee-text {
@@ -49,154 +42,115 @@
     }
 
     main {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem 4rem;
+      padding: 1rem;
       text-align: center;
-      max-width: 1000px;
-      margin: 0 auto;
+      max-width: 600px;
+      margin: auto;
     }
 
     .hero {
       width: 100%;
-      max-width: 600px;
-      border-radius: 20px;
-      box-shadow: 0 0 30px #00ff88;
-      margin-bottom: 1.5rem;
+      max-width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ff88;
+      margin: 1.2rem auto;
     }
 
     h1 {
       color: #facc15;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 800;
+      margin-bottom: 1rem;
     }
 
     p {
-      font-size: 0.85rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
+      font-size: 0.7rem;
+      line-height: 1.4;
+      margin-bottom: 1rem;
     }
 
     .btn {
       background-color: #8a2be2;
       color: #fff;
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-      font-size: 0.7rem;
-      margin: 0.5rem;
-      display: inline-block;
+      padding: 0.6rem 1rem;
+      font-size: 0.6rem;
+      margin: 0.4rem;
+      border: none;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      transition: transform 0.2s ease, background 0.2s ease;
-      box-shadow: 0 0 12px #8a2be2;
+      display: inline-block;
+      transition: transform 0.2s ease;
+      box-shadow: 0 0 10px #8a2be2;
     }
 
     .btn:hover {
-      transform: scale(1.08);
+      transform: scale(1.05);
       background-color: #9b30ff;
     }
 
     .section {
-      margin-top: 2.5rem;
-      padding: 1.5rem;
-      width: 90%;
       background: rgba(255,255,255,0.05);
-      border-radius: 14px;
-      box-shadow: 0 0 20px #8a2be2aa;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 0 15px #8a2be2aa;
     }
 
     .section h2 {
+      font-size: 0.9rem;
       color: #facc15;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     .section p,
     .section ul {
-      font-size: 0.7rem;
-    }
-
-    .history-box {
-      max-height: 200px;
-      overflow-y: auto;
-      padding-right: 10px;
+      font-size: 0.65rem;
       text-align: left;
     }
 
     ul {
-      list-style: none;
-      padding-left: 0;
+      padding-left: 1rem;
     }
 
     li::before {
       content: "🔥 ";
     }
 
-    .socials {
-      margin-top: 2rem;
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .socials img {
-      width: 36px;
-      height: 36px;
-      background: #facc15;
-      padding: 6px;
-      border-radius: 6px;
-      transition: transform 0.2s ease;
-      filter: drop-shadow(0 0 6px #facc15);
-    }
-
-    .socials img:hover {
-      transform: scale(1.2);
-    }
-
-    .partners {
-      margin-top: 3rem;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.55rem;
-      color: #888;
-      padding: 1.5rem 1rem 2rem;
+    .history-box {
+      max-height: 140px;
+      overflow-y: auto;
+      padding-right: 6px;
     }
 
     .roadmap-box {
-      max-height: 220px;
+      max-height: 180px;
       overflow-y: auto;
+      padding-right: 6px;
       text-align: left;
-      padding-right: 10px;
     }
 
     .fun-roadmap {
       list-style: none;
       padding: 0;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
     }
 
     .fun-roadmap li {
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
+      padding-left: 1.2rem;
       position: relative;
-      padding-left: 1.4rem;
     }
 
     .fun-roadmap li span {
       position: absolute;
       left: 0;
-      top: 0;
     }
 
     .bar {
-      height: 6px;
-      border-radius: 10px;
-      margin-top: 5px;
+      height: 5px;
+      border-radius: 6px;
+      margin-top: 4px;
       background: #333;
       overflow: hidden;
       position: relative;
@@ -205,46 +159,68 @@
     .bar::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 0;
       height: 100%;
-      width: 0;
-      animation: fillBar 2s forwards;
+      top: 0;
+      left: 0;
     }
 
     .bar.done::before {
-      background: #00ff88;
       width: 100%;
+      background: #00ff88;
     }
 
     .bar.in-progress::before {
-      background: #facc15;
       width: 60%;
+      background: #facc15;
     }
 
     .bar.future::before {
-      background: #555;
       width: 20%;
+      background: #666;
     }
 
-    @keyframes fillBar {
-      from { width: 0; }
-      to { width: inherit; }
+    .socials {
+      margin-top: 1.2rem;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    .socials img {
+      width: 30px;
+      height: 30px;
+      background: #facc15;
+      border-radius: 5px;
+      padding: 4px;
+      filter: drop-shadow(0 0 5px #facc15);
+      transition: transform 0.2s ease;
+    }
+
+    .socials img:hover {
+      transform: scale(1.1);
+    }
+
+    footer {
+      font-size: 0.5rem;
+      color: #aaa;
+      margin: 1.5rem 0;
     }
   </style>
 </head>
 <body>
+
   <div class="marquee-container">
-    <div class="marquee-text">$KAKAROT $KAKAROT $KAKAROT $KAKAROT $KAKAROT $KAKAROT</div>
+    <div class="marquee-text">$KAKAROT $KAKAROT $KAKAROT $KAKAROT $KAKAROT</div>
   </div>
 
   <main>
-    <img src="be70ec86fc53e267f668fc1815f6e1fe.jpg" alt="$KAKAROT Hero" class="hero">
+    <img src="be70ec86fc53e267f668fc1815f6e1fe.jpg" alt="$KAKAROT" class="hero">
+
     <h1>$KAKAROT</h1>
     <p>🔥 The Legend of the Saiyan Begins!<br>Join the Kakarot Clan. Become a meme warrior in the crypto universe.</p>
 
     <a href="https://t.me/kamecoinsquad" class="btn" target="_blank">Join Telegram</a>
-    <button onclick="playSound()" class="btn">💥 Power Up!</button>
+    <button onclick="document.getElementById('dbzSound').play()" class="btn">💥 Power Up!</button>
 
     <audio id="dbzSound">
       <source src="over9000.mp3" type="audio/mpeg">
@@ -298,19 +274,9 @@
       </a>
     </div>
 
-    <div class="partners">
-      <p style="font-size: 0.55rem; color: #facc15;">🤝 Partnered with <a href="https://dxsale.network" target="_blank" style="color: #00ff88; text-decoration: none; font-weight: bold;">DxSale</a></p>
-    </div>
+    <footer>
+      Made with 💛 by the $KAKAROT Dojo
+    </footer>
   </main>
-
-  <footer>
-    Made with 💛 by the $KAKAROT Dojo
-  </footer>
-
-  <script>
-    function playSound() {
-      document.getElementById('dbzSound').play();
-    }
-  </script>
 </body>
 </html>
