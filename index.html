@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>$KAKAROT – Unleash the Saiyan Spirit</title>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
   <style>
     * {
@@ -22,6 +20,7 @@
       background-color: #000;
       color: white;
       overflow-x: hidden;
+      transition: background 0.4s ease;
     }
 
     .marquee-container {
@@ -45,7 +44,7 @@
     }
 
     @keyframes scrollText {
-      0%   { transform: translateX(0); }
+      0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
 
@@ -93,6 +92,7 @@
       font-weight: bold;
       transition: transform 0.2s ease, background 0.2s ease;
       box-shadow: 0 0 12px #8a2be2;
+      cursor: pointer;
     }
 
     .btn:hover {
@@ -115,11 +115,13 @@
       margin-bottom: 1rem;
     }
 
-    .section p, .section ul {
+    .section p,
+    .section ul {
       font-size: 0.7rem;
     }
 
-    .history-box, .roadmap-box {
+    .history-box,
+    .roadmap-box {
       max-height: 200px;
       overflow-y: auto;
       padding-right: 10px;
@@ -157,26 +159,44 @@
       transform: scale(1.2);
     }
 
+    .partners {
+      margin-top: 3rem;
+    }
+
     footer {
       text-align: center;
       font-size: 0.55rem;
       color: #888;
       padding: 1.5rem 1rem 2rem;
     }
+
+    #dojoGame {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #111;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #facc15;
+      font-size: 0.7rem;
+    }
+
+    .powerup-mode {
+      background-color: #111;
+      box-shadow: inset 0 0 50px #00ff88;
+    }
   </style>
 </head>
 <body>
   <div class="marquee-container">
-    <div class="marquee-text">$KAKAROT $KAKAROT $KAKAROT $KAKAROT</div>
+    <div class="marquee-text">$KAKAROT $KAKAROT $KAKAROT $KAKAROT $KAKAROT $KAKAROT</div>
   </div>
 
   <main>
     <img src="be70ec86fc53e267f668fc1815f6e1fe.jpg" alt="$KAKAROT Hero" class="hero">
     <h1>$KAKAROT</h1>
-    <p>🔥 Unleash your inner Saiyan. Meme hard. Moon harder.</p>
+    <p>🔥 The Legend of the Saiyan Begins!<br>Join the Kakarot Clan. Become a meme warrior in the crypto universe.</p>
 
     <a href="https://t.me/kamecoinsquad" class="btn" target="_blank">Join Telegram</a>
-    <button onclick="playSound()" class="btn">💥 Power Up!</button>
+    <button onclick="powerUp()" class="btn">💥 Power Up!</button>
 
     <audio id="dbzSound">
       <source src="over9000.mp3" type="audio/mpeg">
@@ -185,19 +205,21 @@
     <div class="section">
       <h2>📖 Why We Created $KAKAROT</h2>
       <div class="history-box">
-        <p>This isn’t just a meme. It’s our childhood nostalgia turned into tokenized power.<br><br>
-        We all remember watching Goku go ultra instinct. Now you can go ultra degen.<br><br>
-        Once a Saiyan, always a Saiyan.</p>
+        <p>We created $KAKAROT not just as a meme — but as a tribute to the energy, imagination, and childhood nostalgia that Dragon Ball gave us.<br><br>
+        When we were young, we’d rush home after school, eyes wide, hearts pounding, waiting for Goku to charge up the next big Kamehameha. That feeling of limitless power, of overcoming the impossible — that's what we want to bring back.<br><br>
+        Now as adults in crypto, we channel that same energy into $KAKAROT. This isn’t just a token. It’s a power level. A dojo for believers. A meme with meaning.<br><br>
+        Because once a Saiyan, always a Saiyan.</p>
       </div>
     </div>
 
     <div class="section">
       <h2>📊 Tokenomics</h2>
       <ul>
-        <li>Total Supply: 59,000,000,000,000,000,000 $KAKAROT</li>
-        <li>Taxes: 2% Buy / 2% Sell – goes to the Capsule Corp vault</li>
-        <li>LP Burned. Contract Renounced. Nothing can stop the Saiyan storm.</li>
-        <li>Community Powered – 100% vibes, 0% rug</li>
+        <li>Total Supply: 59,000,000,000,000,000,000 $KAKAROT (yes, 18 zeros)</li>
+        <li>100% Community Owned (even Goku doesn’t hold dev tokens)</li>
+        <li>LP Burned 🔥</li>
+        <li>Contract Renounced 📜</li>
+        <li>Taxes: 2% Buy / 2% Sell – used to fuel Senzu Beans 🍃</li>
       </ul>
     </div>
 
@@ -205,24 +227,24 @@
       <h2>🗺️ Roadmap</h2>
       <div class="roadmap-box">
         <ul>
-          <li>✅ Launch $KAKAROT</li>
-          <li>✅ 9000+ memes powered up</li>
-          <li>🔜 Get verified on DEXTools, CoinGecko</li>
-          <li>🔜 Meme Contest – Winner gets a senzu bean (or ETH)</li>
-          <li>🔜 NFT Capsule Drop: Legendary Saiyans</li>
-          <li>🔜 Dojo Game Beta (Fight. Train. Earn.)</li>
-          <li>🔜 Staking: Train and gain $KAKAROT</li>
+          <li>✅ Launch $KAKAROT into the crypto stratosphere</li>
+          <li>✅ Build a clan on Telegram & Twitter</li>
+          <li>✅ First Kamehameha Meme Contest</li>
+          <li>🔜 Listing on CoinGecko & DEXTools</li>
+          <li>🔜 NFT Drop: “Super Saiyan Club”</li>
+          <li>🔜 Staking Dojo (train to earn)</li>
+          <li>🔜 Fusion Events (partner tokens unite!)</li>
+          <li>🔜 KAKAROT Mini Game Battles</li>
+          <li>🔜 Merch Launch: “It’s Over 9000!” Edition</li>
         </ul>
       </div>
     </div>
 
-    <div class="section">
-      <h2>🎮 Dojo Rewards</h2>
-      <p style="font-size: 0.75rem;">Train like a Saiyan, earn like a warrior.<br>Connect your wallet and claim your $KAKAROT rewards.</p>
-      <button class="btn" onclick="connectWallet()">⚡ Connect Wallet</button>
-      <button class="btn" onclick="claimReward()">🎁 Claim Reward</button>
-      <p id="walletAddress" style="font-size: 0.65rem; margin-top: 0.5rem; color: #00ff88;"></p>
-      <p id="txStatus" style="font-size: 0.65rem; margin-top: 0.5rem;"></p>
+    <div id="dojoGame">
+      <h2>🥋 Dojo Mini Game</h2>
+      <p>Click to Train Your Saiyan Power Level 💪</p>
+      <p><strong>Power Level:</strong> <span id="power">0</span></p>
+      <button class="btn" onclick="train()">Train 🥊</button>
     </div>
 
     <div class="socials">
@@ -233,6 +255,10 @@
         <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
       </a>
     </div>
+
+    <div class="partners">
+      <p style="font-size: 0.55rem; color: #facc15;">🤝 Partnered with <a href="https://dxsale.network" target="_blank" style="color: #00ff88; text-decoration: none; font-weight: bold;">DxSale</a></p>
+    </div>
   </main>
 
   <footer>
@@ -240,63 +266,15 @@
   </footer>
 
   <script>
-    function playSound() {
+    let powerLevel = 0;
+    function train() {
+      powerLevel += Math.floor(Math.random() * 100) + 1;
+      document.getElementById('power').innerText = powerLevel;
+    }
+
+    function powerUp() {
+      document.body.classList.toggle('powerup-mode');
       document.getElementById('dbzSound').play();
-    }
-
-    let web3;
-    let userAccount;
-    const tokenAddress = "0x1234567890abcdef1234567890abcdef12345678"; // Substitua pelo seu contrato
-    const tokenAbi = [
-      {
-        constant: false,
-        inputs: [
-          { name: "_to", type: "address" },
-          { name: "_value", type: "uint256" }
-        ],
-        name: "transfer",
-        outputs: [{ name: "", type: "bool" }],
-        type: "function"
-      }
-    ];
-
-    async function connectWallet() {
-      if (window.ethereum) {
-        web3 = new Web3(window.ethereum);
-        try {
-          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          userAccount = accounts[0];
-          document.getElementById("walletAddress").innerText = `Connected: ${userAccount}`;
-        } catch (error) {
-          console.error("Connection error:", error);
-        }
-      } else {
-        alert("Please install MetaMask.");
-      }
-    }
-
-    async function claimReward() {
-      if (!web3 || !userAccount) {
-        alert("Connect your wallet first!");
-        return;
-      }
-
-      const token = new web3.eth.Contract(tokenAbi, tokenAddress);
-      const rewardAmount = web3.utils.toWei('1', 'ether');
-      const tx = {
-        from: userAccount,
-        to: tokenAddress,
-        gas: 60000,
-        data: token.methods.transfer(userAccount, rewardAmount).encodeABI()
-      };
-
-      try {
-        await web3.eth.sendTransaction(tx);
-        document.getElementById("txStatus").innerText = "✅ Reward claimed!";
-      } catch (err) {
-        console.error(err);
-        document.getElementById("txStatus").innerText = "❌ Transaction failed.";
-      }
     }
   </script>
 </body>
