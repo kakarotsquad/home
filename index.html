@@ -21,8 +21,7 @@
     #loading-screen {
       position: fixed;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       background: black;
       color: #facc15;
       display: flex;
@@ -131,7 +130,6 @@
       background: rgba(255,255,255,0.05);
       border-radius: 14px;
       box-shadow: 0 0 20px #8a2be2aa;
-      text-align: center;
     }
     .section h2 {
       color: #facc15;
@@ -189,51 +187,25 @@
       padding: 1.5rem 1rem 2rem;
     }
 
-    /* New styles for the game */
-    #game {
-      margin-top: 2rem;
-    }
-    #power-level {
-      font-size: 2rem;
-      color: #00ff88;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 10px #00ff88;
-    }
-    #attack-btn {
-      background-color: #00ff88;
-      color: #000;
-      box-shadow: 0 0 15px #00ff88;
-      font-weight: 900;
-      font-size: 1.2rem;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      user-select: none;
-    }
-    #attack-btn:hover {
-      background-color: #00cc6a;
-      box-shadow: 0 0 25px #00cc6a;
-    }
-    #leaderboard {
-      margin-top: 1.5rem;
-      background: rgba(0, 255, 136, 0.15);
-      border-radius: 10px;
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 1rem;
-      text-align: left;
-      font-size: 0.8rem;
-      color: #000;
-      box-shadow: 0 0 15px #00ff88aa;
-    }
-    #leaderboard h3 {
-      color: #00ff88;
-      margin-bottom: 0.5rem;
+    /* Custom styles for claim wallet section */
+    #wallet-claim {
       text-align: center;
-      font-weight: 800;
+      margin-top: 3rem;
     }
-    #leaderboard ol {
-      padding-left: 20px;
+    #wallet-claim #wallet-address {
+      color: #00ff88;
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+      word-break: break-word;
+    }
+    #wallet-claim #claim-status {
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      min-height: 1.2rem;
+    }
+    #claim-btn {
+      background-color: #00cc6a !important;
+      box-shadow: 0 0 12px #00cc6a !important;
     }
   </style>
 </head>
@@ -249,7 +221,7 @@
     <a href="https://t.me/kamecoinsquad" class="btn" target="_blank">Join Telegram</a>
     <button onclick="playSound()" class="btn">💥 Power Up!</button>
     <button onclick="toggleSaiyan()" class="btn">⚡ Super Saiyan Mode</button>
-
+    
     <div class="section">
       <h2>📖 Why We Created $KAKAROT</h2>
       <div class="history-box">
@@ -261,6 +233,7 @@
         </p>
       </div>
     </div>
+
     <div class="section">
       <h2>📊 Tokenomics</h2>
       <ul>
@@ -270,6 +243,7 @@
         <li>Contract Renounced — no one’s in control, not even Frieza</li>
       </ul>
     </div>
+
     <div class="section">
       <h2>🗺️ Roadmap</h2>
       <div class="scroll-box">
@@ -287,15 +261,13 @@
       </div>
     </div>
 
-    <!-- New Game Section -->
-    <div class="section" id="game">
-      <h2>🔥 Click Battle – Power Up & Earn $KAKAROT Tokens</h2>
-      <div id="power-level">Power Level: 0</div>
-      <button id="attack-btn" class="btn">⚔️ Attack!</button>
-      <div id="leaderboard">
-        <h3>Leaderboard</h3>
-        <ol id="leaderboard-list"></ol>
-      </div>
+    <!-- Wallet Connect + Claim Section -->
+    <div class="section" id="wallet-claim">
+      <h2>💰 Claim Your $KAKAROT Tokens</h2>
+      <button id="connect-wallet-btn" class="btn">Connect Wallet</button>
+      <p id="wallet-address"></p>
+      <button id="claim-btn" class="btn" style="display:none;">Claim Tokens</button>
+      <p id="claim-status"></p>
     </div>
 
     <div class="socials">
@@ -307,98 +279,100 @@
       </a>
     </div>
     <div class="partners">
-      <p style="font-size: 0.55rem; color: #facc15;">🤝 Partnered with <a href="https://dxsale.network" target="_blank" style="color: #00ff88; text-decoration: none; font-weight: bold;">DxSale</a></p>
+      <p style="font-size: 0.55rem; color: #facc15;">
+        🤝 Partnered with
+        <a href="https://dxsale.network" target="_blank" style="color: #00ff88; text-decoration: none; font-weight: bold;">DxSale</a>
+      </p>
     </div>
   </main>
   <footer>
     Made with 💛 by the $KAKAROT Dojo
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.9.0/dist/web3.min.js"></script>
   <script>
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.getElementById("loading-screen").style.display = "none";
       }, 2000);
-      loadLeaderboard();
-      updatePowerLevelDisplay();
     });
 
     function playSound() {
-      document.getElementById('dbzSound').play();
+      document.getElementById("dbzSound").play();
     }
+
     function toggleSaiyan() {
       document.body.classList.toggle("super-saiyan");
     }
 
-    // Game logic
-    const powerLevelKey = "kakarotPowerLevel";
-    const leaderboardKey = "kakarotLeaderboard";
+    // --- MetaMask integration for claim ---
 
-    let powerLevel = parseInt(localStorage.getItem(powerLevelKey)) || 0;
+    const connectBtn = document.getElementById("connect-wallet-btn");
+    const walletAddressEl = document.getElementById("wallet-address");
+    const claimBtn = document.getElementById("claim-btn");
+    const claimStatus = document.getElementById("claim-status");
 
-    const powerLevelEl = document.getElementById("power-level");
-    const attackBtn = document.getElementById("attack-btn");
-    const leaderboardList = document.getElementById("leaderboard-list");
+    let web3;
+    let userAccount;
 
-    attackBtn.addEventListener("click", () => {
-      powerLevel += Math.floor(Math.random() * 10) + 1; // +1 to +10 power
-      savePowerLevel();
-      updatePowerLevelDisplay();
-    });
+    // Exemplo genérico: substitua pelo seu endereço e ABI do contrato real
+    const contractAddress = "0xYourContractAddressHere00000000000000000000";
+    const contractABI = [
+      // ABI mínima com função claim()
+      {
+        inputs: [],
+        name: "claim",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+    ];
 
-    // Save power level to localStorage
-    function savePowerLevel() {
-      localStorage.setItem(powerLevelKey, powerLevel);
-    }
+    let contract;
 
-    // Update power level display
-    function updatePowerLevelDisplay() {
-      powerLevelEl.textContent = `Power Level: ${powerLevel}`;
-    }
-
-    // Load leaderboard from localStorage
-    function loadLeaderboard() {
-      let leaderboard = JSON.parse(localStorage.getItem(leaderboardKey)) || [];
-      renderLeaderboard(leaderboard);
-    }
-
-    // Save leaderboard to localStorage
-    function saveLeaderboard(leaderboard) {
-      localStorage.setItem(leaderboardKey, JSON.stringify(leaderboard));
-    }
-
-    // Render leaderboard
-    function renderLeaderboard(leaderboard) {
-      leaderboardList.innerHTML = "";
-      leaderboard.forEach((entry) => {
-        const li = document.createElement("li");
-        li.textContent = `${entry.name}: ${entry.score}`;
-        leaderboardList.appendChild(li);
-      });
-    }
-
-    // On window unload (or beforeunload) ask for name and save to leaderboard
-    window.addEventListener("beforeunload", (e) => {
-      if (powerLevel > 0) {
-        let name = prompt("Saiyan! Enter your warrior name for the leaderboard:", "Kakarot");
-        if (name && name.trim() !== "") {
-          saveToLeaderboard(name.trim(), powerLevel);
+    async function connectWallet() {
+      if (window.ethereum) {
+        try {
+          await window.ethereum.request({ method: "eth_requestAccounts" });
+          web3 = new Web3(window.ethereum);
+          const accounts = await web3.eth.getAccounts();
+          userAccount = accounts[0];
+          walletAddressEl.textContent = `Connected: ${userAccount}`;
+          connectBtn.style.display = "none";
+          claimBtn.style.display = "inline-block";
+          claimStatus.textContent = "";
+          contract = new web3.eth.Contract(contractABI, contractAddress);
+        } catch (err) {
+          claimStatus.style.color = "red";
+          claimStatus.textContent = `Error connecting wallet: ${err.message}`;
         }
+      } else {
+        claimStatus.style.color = "red";
+        claimStatus.textContent = "MetaMask is not installed!";
       }
-    });
-
-    function saveToLeaderboard(name, score) {
-      let leaderboard = JSON.parse(localStorage.getItem(leaderboardKey)) || [];
-      leaderboard.push({ name, score });
-      // Sort descending
-      leaderboard.sort((a, b) => b.score - a.score);
-      // Keep top 10
-      if (leaderboard.length > 10) leaderboard = leaderboard.slice(0, 10);
-      saveLeaderboard(leaderboard);
-      renderLeaderboard(leaderboard);
     }
+
+    async function claimTokens() {
+      if (!contract || !userAccount) {
+        claimStatus.style.color = "red";
+        claimStatus.textContent = "Please connect your wallet first.";
+        return;
+      }
+      claimStatus.style.color = "white";
+      claimStatus.textContent = "Claiming tokens... Confirm transaction in MetaMask.";
+
+      try {
+        const tx = await contract.methods.claim().send({ from: userAccount });
+        claimStatus.style.color = "lime";
+        claimStatus.textContent = `Claim successful! Tx Hash: ${tx.transactionHash}`;
+      } catch (err) {
+        claimStatus.style.color = "red";
+        claimStatus.textContent = `Claim failed: ${err.message}`;
+      }
+    }
+
+    connectBtn.addEventListener("click", connectWallet);
+    claimBtn.addEventListener("click", claimTokens);
   </script>
-  <audio id="dbzSound">
-    <source src="over9000.mp3" type="audio/mpeg" />
-  </audio>
 </body>
 </html>
