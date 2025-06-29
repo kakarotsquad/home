@@ -21,7 +21,8 @@
     #loading-screen {
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       background: black;
       color: #facc15;
       display: flex;
@@ -187,44 +188,15 @@
       padding: 1.5rem 1rem 2rem;
     }
 
-    /* Custom styles for claim wallet section */
-    #wallet-claim {
-      text-align: center;
-      margin-top: 3rem;
+    /* Adicional para jogo */
+    #click-game ol {
+      list-style: decimal;
+      padding-left: 1rem;
     }
-    #wallet-claim #wallet-address {
-      color: #00ff88;
-      font-size: 0.75rem;
+    #claim-status {
       margin-top: 0.5rem;
-      word-break: break-word;
-    }
-    #wallet-claim #claim-status {
-      margin-top: 0.5rem;
-      font-size: 0.7rem;
-      min-height: 1.2rem;
-    }
-    #claim-btn {
-      background-color: #00cc6a !important;
-      box-shadow: 0 0 12px #00cc6a !important;
-    }
-
-    /* Canvas & game styles */
-    #game-container {
-      margin-top: 3rem;
-      width: 100%;
-      max-width: 600px;
-      position: relative;
-      border-radius: 14px;
-      box-shadow: 0 0 20px #facc15aa;
-      background: #111;
-      user-select: none;
-    }
-    canvas {
-      width: 100%;
-      height: 300px;
-      display: block;
-      border-radius: 14px;
-      background: black;
+      font-size: 0.85rem;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -240,14 +212,20 @@
     <a href="https://t.me/kamecoinsquad" class="btn" target="_blank">Join Telegram</a>
     <button onclick="playSound()" class="btn">💥 Power Up!</button>
     <button onclick="toggleSaiyan()" class="btn">⚡ Super Saiyan Mode</button>
+    <audio id="dbzSound">
+      <source src="over9000.mp3" type="audio/mpeg" />
+    </audio>
 
     <div class="section">
       <h2>📖 Why We Created $KAKAROT</h2>
       <div class="history-box">
         <p>
-          We created $KAKAROT not just as a meme — but as a tribute to the energy, imagination, and childhood nostalgia that Dragon Ball gave us.<br /><br />
-          When we were young, we’d rush home after school, eyes wide, hearts pounding, waiting for Goku to charge up the next big Kamehameha. That feeling of limitless power, of overcoming the impossible — that's what we want to bring back.<br /><br />
-          Now as adults in crypto, we channel that same energy into $KAKAROT. This isn’t just a token. It’s a power level. A dojo for believers. A meme with meaning.<br /><br />
+          We created $KAKAROT not just as a meme — but as a tribute to the energy, imagination, and childhood nostalgia that Dragon Ball gave
+          us.<br /><br />
+          When we were young, we’d rush home after school, eyes wide, hearts pounding, waiting for Goku to charge up the next big Kamehameha.
+          That feeling of limitless power, of overcoming the impossible — that's what we want to bring back.<br /><br />
+          Now as adults in crypto, we channel that same energy into $KAKAROT. This isn’t just a token. It’s a power level. A dojo for believers.
+          A meme with meaning.<br /><br />
           Because once a Saiyan, always a Saiyan.
         </p>
       </div>
@@ -280,18 +258,29 @@
       </div>
     </div>
 
-    <!-- Wallet Connect + Claim Section -->
-    <div class="section" id="wallet-claim">
-      <h2>💰 Claim Your $KAKAROT Tokens</h2>
-      <button id="connect-wallet-btn" class="btn">Connect Wallet</button>
-      <p id="wallet-address"></p>
-      <button id="claim-btn" class="btn" style="display:none;">Claim Tokens</button>
-      <p id="claim-status"></p>
-    </div>
+    <!-- INÍCIO DO JOGO DE CLIQUES -->
+    <div class="section" id="click-game">
+      <h2>🎮 Jogo de Cliques Rápidos</h2>
+      <p>Clique o máximo que puder em 54 segundos!</p>
 
-    <!-- Game container -->
-    <div id="game-container">
-      <canvas id="game-canvas" width="600" height="300"></canvas>
+      <!-- Botão conectar carteira -->
+      <button id="connect-wallet-btn" class="btn">Conectar Carteira MetaMask</button>
+      <p id="wallet-address" style="margin-top:0.5rem; font-size:0.8rem; color:#00ff88;"></p>
+
+      <button id="start-game-btn" class="btn" style="display:none; margin-top:1rem;">Começar Jogo</button>
+
+      <div id="game-info" style="margin-top: 1rem; font-size: 0.8rem; color: #00ff88;"></div>
+
+      <button id="click-btn" class="btn" style="display:none; margin-top:1rem;">Clique Aqui!</button>
+
+      <p id="final-score" style="margin-top:1rem; font-weight:bold;"></p>
+
+      <!-- Claim token botão -->
+      <button id="claim-btn" class="btn" style="display:none; margin-top:1rem;">Reivindicar Tokens</button>
+      <p id="claim-status"></p>
+
+      <h3 style="margin-top:2rem;">🏆 Ranking Semanal (Local)</h3>
+      <ol id="leaderboard" style="text-align:left; max-width:300px; margin: 0 auto 1rem;"></ol>
     </div>
 
     <div class="socials">
@@ -302,177 +291,182 @@
         <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" />
       </a>
     </div>
+
     <div class="partners">
-      <p style="font-size: 0.55rem; color: #facc15;">
-        🤝 Partnered with
-        <a href="https://dxsale.network" target="_blank" style="color: #00ff88; text-decoration: none; font-weight: bold;">DxSale</a>
+      <p style="font-size: 0.55rem; color: #888;">
+        2023 $KAKAROT &copy; All rights reserved.<br />
+        Developed by <a href="https://github.com/kakarot" target="_blank" style="color:#00ff88;">KakarotDev</a>
       </p>
     </div>
   </main>
+
   <footer>
-    Made with 💛 by the $KAKAROT Dojo
+    The power level is rising... Stay tuned!
   </footer>
 
-  <audio id="dbzSound" src="https://www.soundjay.com/misc/sounds/kamehameha-1.mp3"></audio>
-
-  <script src="https://cdn.jsdelivr.net/npm/web3@1.9.0/dist/web3.min.js"></script>
   <script>
+    // LOADING SCREEN
     window.addEventListener("load", () => {
+      const loader = document.getElementById("loading-screen");
       setTimeout(() => {
-        document.getElementById("loading-screen").style.display = "none";
-      }, 2000);
+        loader.style.display = "none";
+      }, 2200);
     });
 
+    // SOUND
     function playSound() {
-      document.getElementById("dbzSound").play();
+      const sound = document.getElementById("dbzSound");
+      if(sound) {
+        sound.currentTime = 0;
+        sound.play();
+      }
     }
 
+    // SUPER SAIYAN TOGGLE
     function toggleSaiyan() {
       document.body.classList.toggle("super-saiyan");
     }
 
-    // --- MetaMask integration for claim ---
+    // ================== META MASK INTEGRAÇÃO E JOGO ===================
 
-    const connectBtn = document.getElementById("connect-wallet-btn");
+    let userAccount = null;
+
+    const connectWalletBtn = document.getElementById("connect-wallet-btn");
     const walletAddressEl = document.getElementById("wallet-address");
+    const startBtn = document.getElementById("start-game-btn");
+    const clickBtn = document.getElementById("click-btn");
+    const gameInfo = document.getElementById("game-info");
+    const finalScoreEl = document.getElementById("final-score");
+    const leaderboardEl = document.getElementById("leaderboard");
     const claimBtn = document.getElementById("claim-btn");
     const claimStatus = document.getElementById("claim-status");
 
-    let web3;
-    let userAccount;
+    let clickCount = 0;
+    const gameDuration = 54; // segundos
+    let timer;
+    let timeLeft;
 
-    // Exemplo genérico: substitua pelo seu endereço e ABI do contrato real
-    const contractAddress = "0xYourContractAddressHere00000000000000000000";
-    const contractABI = [
-      // ABI mínima com função claim()
-      {
-        inputs: [],
-        name: "claim",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-    ];
-
-    let contract;
-
+    // Connect to MetaMask
     async function connectWallet() {
-      if (window.ethereum) {
-        try {
-          await window.ethereum.request({ method: "eth_requestAccounts" });
-          web3 = new Web3(window.ethereum);
-          const accounts = await web3.eth.getAccounts();
-          userAccount = accounts[0];
-          walletAddressEl.textContent = `Connected: ${userAccount}`;
-          connectBtn.style.display = "none";
-          claimBtn.style.display = "inline-block";
-          claimStatus.textContent = "";
-          contract = new web3.eth.Contract(contractABI, contractAddress);
-        } catch (err) {
-          claimStatus.style.color = "red";
-          claimStatus.textContent = `Error connecting wallet: ${err.message}`;
-        }
-      } else {
-        claimStatus.style.color = "red";
-        claimStatus.textContent = "MetaMask is not installed!";
-      }
-    }
-
-    async function claimTokens() {
-      if (!contract || !userAccount) {
-        claimStatus.style.color = "red";
-        claimStatus.textContent = "Please connect your wallet first.";
+      if(typeof window.ethereum === "undefined") {
+        alert("MetaMask não encontrado! Instale a extensão e tente novamente.");
         return;
       }
-      claimStatus.style.color = "white";
-      claimStatus.textContent = "Claiming tokens... Confirm transaction in MetaMask.";
-
       try {
-        const tx = await contract.methods.claim().send({ from: userAccount });
-        claimStatus.style.color = "lime";
-        claimStatus.textContent = `Claim successful! Tx Hash: ${tx.transactionHash}`;
+        const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+        userAccount = accounts[0];
+        walletAddressEl.textContent = "Carteira conectada: " + userAccount;
+        connectWalletBtn.style.display = "none";
+        startBtn.style.display = "inline-block";
+        loadLeaderboard();
       } catch (err) {
-        claimStatus.style.color = "red";
-        claimStatus.textContent = `Claim failed: ${err.message}`;
+        alert("Erro ao conectar carteira: " + err.message);
       }
     }
 
-    connectBtn.addEventListener("click", connectWallet);
-    claimBtn.addEventListener("click", claimTokens);
+    // Save score localStorage
+    function saveScore(address, score) {
+      let scores = JSON.parse(localStorage.getItem("kakarot_click_scores") || "[]");
+      scores.push({address, score, date: Date.now()});
+      // Limpar pontuações antigas (mais de 7 dias)
+      scores = scores.filter(s => (Date.now() - s.date) < 7*24*60*60*1000);
+      localStorage.setItem("kakarot_click_scores", JSON.stringify(scores));
+    }
 
-    // --------- Game Script ---------
+    // Load leaderboard
+    function loadLeaderboard() {
+      let scores = JSON.parse(localStorage.getItem("kakarot_click_scores") || "[]");
+      // Filtrar os últimos 7 dias e ordenar
+      scores = scores.filter(s => (Date.now() - s.date) < 7*24*60*60*1000);
+      scores.sort((a,b) => b.score - a.score);
+      scores = scores.slice(0,10);
 
-    const canvas = document.getElementById("game-canvas");
-    const ctx = canvas.getContext("2d");
-
-    const player = {
-      x: 50,
-      y: 150,
-      width: 80,
-      height: 150,
-      frame: 0,
-      frameCount: 4,
-      frameDelay: 5,
-      frameTimer: 0,
-      color: "#00ff88",
-    };
-
-    let kamehameha = null;
-
-    function drawPlayer() {
-      ctx.fillStyle = player.color;
-      ctx.fillRect(player.x, player.y, player.width, player.height);
-
-      // Simple animation frame timer
-      player.frameTimer++;
-      if (player.frameTimer >= player.frameDelay) {
-        player.frame++;
-        player.frameTimer = 0;
-        if (player.frame >= player.frameCount) player.frame = 0;
+      leaderboardEl.innerHTML = "";
+      if(scores.length === 0) {
+        leaderboardEl.innerHTML = "<li>Nenhum registro ainda.</li>";
+        return;
       }
-
-      // Draw "face" for fun
-      ctx.fillStyle = "#000";
-      ctx.fillRect(player.x + 20, player.y + 40, 20, 20); // eyes
-      ctx.fillRect(player.x + 40, player.y + 40, 20, 20);
+      scores.forEach(({address, score}, i) => {
+        leaderboardEl.innerHTML += `<li><strong>${i+1}.</strong> ${address.slice(0,6)}...${address.slice(-4)} - ${score} cliques</li>`;
+      });
     }
 
-    function drawKamehameha() {
-      if (!kamehameha) return;
-      ctx.fillStyle = "#00ccff";
-      ctx.beginPath();
-      ctx.ellipse(kamehameha.x, kamehameha.y, 20, 10, 0, 0, 2 * Math.PI);
-      ctx.fill();
+    // Start game
+    function startGame() {
+      if(!userAccount) {
+        alert("Conecte sua carteira para jogar e registrar seus cliques!");
+        return;
+      }
+      clickCount = 0;
+      timeLeft = gameDuration;
+      finalScoreEl.textContent = "";
+      gameInfo.textContent = `Tempo restante: ${timeLeft}s`;
+      startBtn.style.display = "none";
+      clickBtn.style.display = "inline-block";
+      claimBtn.style.display = "none";
+      claimStatus.textContent = "";
 
-      // Move it to the right
-      kamehameha.x += kamehameha.speed;
-      if (kamehameha.x > canvas.width + 50) {
-        kamehameha = null;
+      timer = setInterval(() => {
+        timeLeft--;
+        gameInfo.textContent = `Tempo restante: ${timeLeft}s`;
+        if(timeLeft <= 0) {
+          clearInterval(timer);
+          endGame();
+        }
+      }, 1000);
+    }
+
+    // End game
+    function endGame() {
+      clickBtn.style.display = "none";
+      startBtn.style.display = "inline-block";
+      finalScoreEl.textContent = `Fim do jogo! Você clicou ${clickCount} vezes.`;
+
+      // Salvar resultado na leaderboard local
+      saveScore(userAccount, clickCount);
+      loadLeaderboard();
+
+      // Mostrar botão claim para usuários no top 10 local
+      let scores = JSON.parse(localStorage.getItem("kakarot_click_scores") || "[]");
+      scores = scores.filter(s => (Date.now() - s.date) < 7*24*60*60*1000);
+      scores.sort((a,b) => b.score - a.score);
+      const rank = scores.findIndex(s => s.address === userAccount && s.score === clickCount) + 1;
+
+      if(rank > 0 && rank <= 10) {
+        claimBtn.style.display = "inline-block";
+        claimStatus.textContent = `Parabéns! Você está no top ${rank} semanal. Pode reivindicar seus tokens!`;
+        claimStatus.style.color = "#00ff88";
+      } else {
+        claimBtn.style.display = "none";
+        claimStatus.textContent = `Você não está no top 10. Continue tentando!`;
+        claimStatus.style.color = "#f44336";
       }
     }
 
-    function gameLoop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawPlayer();
-      drawKamehameha();
-      requestAnimationFrame(gameLoop);
-    }
+    // Eventos
+    connectWalletBtn.addEventListener("click", connectWallet);
+    startBtn.addEventListener("click", startGame);
+    clickBtn.addEventListener("click", () => {
+      clickCount++;
+    });
 
-    // Shoot kamehameha on button click
-    function shootKamehameha() {
-      if (!kamehameha) {
-        kamehameha = {
-          x: player.x + player.width,
-          y: player.y + player.height / 2,
-          speed: 10,
-        };
-        playSound();
+    // Exemplo básico da função claim, você deve adaptar para chamar seu contrato real
+    claimBtn.addEventListener("click", async () => {
+      claimBtn.disabled = true;
+      claimStatus.textContent = "Processando reivindicação...";
+      try {
+        // Aqui você faria a chamada para o smart contract para claim tokens
+        // Exemplo:
+        // await contract.methods.claimTokens().send({from: userAccount});
+        // Simulando delay
+        await new Promise(r => setTimeout(r, 2000));
+        claimStatus.textContent = "Tokens reivindicados com sucesso! 💥";
+      } catch (e) {
+        claimStatus.textContent = "Erro ao reivindicar tokens: " + e.message;
       }
-    }
+      claimBtn.disabled = false;
+    });
 
-    document.querySelector('button.btn[onclick="playSound()"]').addEventListener("click", shootKamehameha);
-
-    gameLoop();
   </script>
 </body>
 </html>
