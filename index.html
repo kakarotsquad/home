@@ -6,7 +6,294 @@
   <title>$KAKAROT – Unleash the Saiyan Spirit</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;800&display=swap" rel="stylesheet" />
   <style>
-    /* (mesmo CSS, mantido igual ao anterior, só omito aqui para resumir) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      height: 100%;
+      font-family: 'Rubik', sans-serif;
+      background-color: #000;
+      color: white;
+      overflow-x: hidden;
+    }
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: #facc15;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      z-index: 9999;
+      animation: fadeOut 2s forwards;
+      animation-delay: 2s;
+    }
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+    .super-saiyan {
+      background-color: #222;
+      color: #ffed4d;
+      transition: all 0.5s ease;
+    }
+    .super-saiyan .btn {
+      background-color: #facc15 !important;
+      color: black;
+      box-shadow: 0 0 12px #facc15;
+    }
+    .super-saiyan .section {
+      box-shadow: 0 0 25px #facc15aa;
+    }
+    .super-saiyan h1,
+    .super-saiyan h2 {
+      color: #ffe600;
+    }
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      background: #00ff88;
+      color: #000;
+      font-size: 0.65rem;
+      padding: 0.5rem 0;
+      box-shadow: 0 0 10px #00ff88;
+      z-index: 1000;
+      position: relative;
+      font-weight: bold;
+    }
+    .marquee-text {
+      display: inline-block;
+      animation: scrollText 12s linear infinite;
+      padding-left: 100%;
+    }
+    @keyframes scrollText {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    main {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .hero {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #00ff88;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      color: #facc15;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+    }
+    p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      background-color: #8a2be2;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      margin: 0.5rem;
+      display: inline-block;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.2s ease, background 0.2s ease;
+      box-shadow: 0 0 12px #8a2be2;
+      cursor: pointer;
+    }
+    .btn:hover {
+      transform: scale(1.08);
+      background-color: #9b30ff;
+    }
+    .section {
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      box-shadow: 0 0 20px #8a2be2aa;
+    }
+    .section h2 {
+      color: #facc15;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .section p,
+    .section ul {
+      font-size: 0.7rem;
+    }
+    .history-box {
+      max-height: 200px;
+      overflow-y: auto;
+      padding-right: 10px;
+      text-align: left;
+    }
+    .scroll-box {
+      max-height: 160px;
+      overflow-y: auto;
+      text-align: left;
+      padding-right: 10px;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li::before {
+      content: "🔥 ";
+    }
+    .socials {
+      margin-top: 2rem;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .socials img {
+      width: 36px;
+      height: 36px;
+      background: #facc15;
+      padding: 6px;
+      border-radius: 6px;
+      transition: transform 0.2s ease;
+      filter: drop-shadow(0 0 6px #facc15);
+    }
+    .socials img:hover {
+      transform: scale(1.2);
+    }
+    .partners {
+      margin-top: 3rem;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.55rem;
+      color: #888;
+      padding: 1.5rem 1rem 2rem;
+    }
+
+    /* New styles for game and leaderboard */
+    #game-section {
+      margin-top: 3rem;
+      background: rgba(250, 204, 21, 0.1);
+      border: 2px solid #facc15;
+      border-radius: 14px;
+      padding: 1.5rem;
+      color: black;
+      background-color: #111;
+      box-shadow: 0 0 25px #facc15aa;
+    }
+    #game-section h2 {
+      color: #facc15;
+      margin-bottom: 1rem;
+    }
+    #click-button {
+      font-size: 1.2rem;
+      padding: 0.8rem 1.2rem;
+      background-color: #facc15;
+      border: none;
+      border-radius: 10px;
+      color: black;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 15px #facc15;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    #click-button:hover:enabled {
+      background-color: #ffd633;
+    }
+    #click-button:disabled {
+      background-color: #777;
+      cursor: default;
+      box-shadow: none;
+    }
+    #timer {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      color: #facc15;
+    }
+    #score {
+      font-size: 1.2rem;
+      margin-top: 0.8rem;
+      color: #facc15;
+      font-weight: 700;
+    }
+    #leaderboard {
+      margin-top: 1.5rem;
+      color: white;
+      text-align: left;
+      max-height: 220px;
+      overflow-y: auto;
+      font-size: 0.8rem;
+      background: #222;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #facc15aa inset;
+    }
+    #claim-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    #connect-wallet-btn,
+    #claim-btn {
+      background-color: #facc15;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      color: black;
+      box-shadow: 0 0 15px #facc15;
+      font-size: 1rem;
+      margin: 0.5rem;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    #connect-wallet-btn:hover,
+    #claim-btn:hover:enabled {
+      background-color: #ffd633;
+    }
+    #claim-btn:disabled {
+      background-color: #777;
+      cursor: default;
+      box-shadow: none;
+    }
+    #wallet-address {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: #facc15;
+      word-break: break-all;
+    }
+    #status-message {
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: #facc15;
+      min-height: 1.2em;
+    }
   </style>
 </head>
 <body>
@@ -17,7 +304,10 @@
   <main>
     <img src="be70ec86fc53e267f668fc1815f6e1fe.jpg" alt="$KAKAROT Hero" class="hero" />
     <h1>$KAKAROT</h1>
-    <p>🔥 The Legend of the Saiyan Begins!<br />Join the Kakarot Clan. Become a meme warrior in the crypto universe.</p>
+    <p>
+      🔥 The Legend of the Saiyan Begins!<br />
+      Join the Kakarot Clan. Become a meme warrior in the crypto universe.
+    </p>
     <a href="https://t.me/kamecoinsquad" class="btn" target="_blank">Join Telegram</a>
     <button onclick="playSound()" class="btn">💥 Power Up!</button>
     <button onclick="toggleSaiyan()" class="btn">⚡ Super Saiyan Mode</button>
@@ -29,12 +319,13 @@
       <h2>📖 Why We Created $KAKAROT</h2>
       <div class="history-box">
         <p>
-          We created $KAKAROT not just as a meme — but as a tribute to the energy, imagination, and childhood nostalgia that Dragon Ball gave
-          us.<br /><br />
-          When we were young, we’d rush home after school, eyes wide, hearts pounding, waiting for Goku to charge up the next big Kamehameha.
-          That feeling of limitless power, of overcoming the impossible — that's what we want to bring back.<br /><br />
-          Now as adults in crypto, we channel that same energy into $KAKAROT. This isn’t just a token. It’s a power level. A dojo for believers.
-          A meme with meaning.<br /><br />
+          We created $KAKAROT not just as a meme — but as a tribute to the energy,
+          imagination, and childhood nostalgia that Dragon Ball gave us.<br /><br />
+          When we were young, we’d rush home after school, eyes wide, hearts pounding,
+          waiting for Goku to charge up the next big Kamehameha. That feeling of limitless
+          power, of overcoming the impossible — that's what we want to bring back.<br /><br />
+          Now as adults in crypto, we channel that same energy into $KAKAROT. This isn’t
+          just a token. It’s a power level. A dojo for believers. A meme with meaning.<br /><br />
           Because once a Saiyan, always a Saiyan.
         </p>
       </div>
@@ -67,29 +358,6 @@
       </div>
     </div>
 
-    <!-- CLICK GAME SECTION -->
-    <div class="section" id="click-game">
-      <h2>🎮 Fast Click Game</h2>
-      <p>Click as fast as you can in 54 seconds!</p>
-
-      <button id="connect-wallet-btn" class="btn">Connect MetaMask Wallet</button>
-      <p id="wallet-address" style="margin-top:0.5rem; font-size:0.8rem; color:#00ff88;"></p>
-
-      <button id="start-game-btn" class="btn" style="display:none; margin-top:1rem;">Start Game</button>
-
-      <div id="game-info" style="margin-top: 1rem; font-size: 0.8rem; color: #00ff88;"></div>
-
-      <button id="click-btn" class="btn" style="display:none; margin-top:1rem;">Click Here!</button>
-
-      <p id="final-score" style="margin-top:1rem; font-weight:bold;"></p>
-
-      <button id="claim-btn" class="btn" style="display:none; margin-top:1rem;">Claim Tokens</button>
-      <p id="claim-status"></p>
-
-      <h3 style="margin-top:2rem;">🏆 Weekly Leaderboard (Local)</h3>
-      <ol id="leaderboard" style="text-align:left; max-width:300px; margin: 0 auto 1rem;"></ol>
-    </div>
-
     <div class="socials">
       <a href="https://t.me/kamecoinsquad" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" />
@@ -100,166 +368,197 @@
     </div>
 
     <div class="partners">
-      <p style="font-size: 0.55rem; color: #888;">
-        2023 $KAKAROT &copy; All rights reserved.<br />
-        Developed by <a href="https://github.com/kakarot" target="_blank" style="color:#00ff88;">KakarotDev</a>
+      <p style="font-size: 0.55rem; color: #facc15;">
+        🤝 Partnered with
+        <a
+          href="https://dxsale.network"
+          target="_blank"
+          style="color: #00ff88; text-decoration: none; font-weight: bold;"
+          >DxSale</a
+        >
       </p>
+    </div>
+
+    <!-- GAME + LEADERBOARD + METAMASK CLAIM SECTION -->
+    <div id="game-section" class="section">
+      <h2>🔥 Click Battle Challenge</h2>
+      <p>Click the button as many times as possible in 54 seconds!</p>
+      <button id="click-button" disabled>Start Game</button>
+      <div id="timer">Time: 54.0s</div>
+      <div id="score">Clicks: 0</div>
+
+      <h3 style="margin-top: 2rem; color: #facc15;">Weekly Leaderboard - Top 10 Fastest Clickers</h3>
+      <div id="leaderboard">Loading leaderboard...</div>
+
+      <div id="claim-section">
+        <button id="connect-wallet-btn">Connect MetaMask Wallet</button>
+        <div id="wallet-address"></div>
+        <button id="claim-btn" disabled>Claim Tokens</button>
+        <div id="status-message"></div>
+      </div>
     </div>
   </main>
 
   <footer>
-    The power level is rising... Stay tuned!
+    Made with 💛 by the $KAKAROT Dojo
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
   <script>
-    // Loading Screen
-    window.addEventListener("load", () => {
-      const loader = document.getElementById("loading-screen");
+    window.addEventListener('load', () => {
       setTimeout(() => {
-        loader.style.display = "none";
-      }, 2200);
+        document.getElementById('loading-screen').style.display = 'none';
+        // Enable start button once page loaded
+        document.getElementById('click-button').disabled = false;
+      }, 2000);
     });
 
-    // Sound effect
     function playSound() {
-      const sound = document.getElementById("dbzSound");
-      if(sound) {
-        sound.currentTime = 0;
-        sound.play();
-      }
+      document.getElementById('dbzSound').play();
     }
 
-    // Super Saiyan toggle
     function toggleSaiyan() {
-      document.body.classList.toggle("super-saiyan");
+      document.body.classList.toggle('super-saiyan');
     }
 
-    // MetaMask + Click Game Integration
+    // GAME LOGIC
+    const clickButton = document.getElementById('click-button');
+    const timerDisplay = document.getElementById('timer');
+    const scoreDisplay = document.getElementById('score');
+    const leaderboardDiv = document.getElementById('leaderboard');
 
-    let userAccount = null;
+    let clicks = 0;
+    let gameStarted = false;
+    let timeLeft = 54.0;
+    let timerInterval = null;
 
-    const connectWalletBtn = document.getElementById("connect-wallet-btn");
-    const walletAddressEl = document.getElementById("wallet-address");
-    const startBtn = document.getElementById("start-game-btn");
-    const clickBtn = document.getElementById("click-btn");
-    const gameInfo = document.getElementById("game-info");
-    const finalScoreEl = document.getElementById("final-score");
-    const leaderboardEl = document.getElementById("leaderboard");
-    const claimBtn = document.getElementById("claim-btn");
-    const claimStatus = document.getElementById("claim-status");
-
-    let clickCount = 0;
-    const gameDuration = 54; // seconds
-    let timer;
-    let timeLeft;
-
-    async function connectWallet() {
-      if(typeof window.ethereum === "undefined") {
-        alert("MetaMask not detected! Please install the extension and try again.");
-        return;
+    clickButton.addEventListener('click', () => {
+      if (!gameStarted) {
+        startGame();
+      } else {
+        clicks++;
+        scoreDisplay.textContent = `Clicks: ${clicks}`;
       }
-      try {
-        const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-        userAccount = accounts[0];
-        walletAddressEl.textContent = "Wallet connected: " + userAccount;
-        connectWalletBtn.style.display = "none";
-        startBtn.style.display = "inline-block";
-        loadLeaderboard();
-      } catch (err) {
-        alert("Error connecting wallet: " + err.message);
-      }
-    }
-
-    function saveScore(address, score) {
-      let scores = JSON.parse(localStorage.getItem("kakarot_click_scores") || "[]");
-      scores.push({address, score, date: Date.now()});
-      scores = scores.filter(s => (Date.now() - s.date) < 7*24*60*60*1000);
-      localStorage.setItem("kakarot_click_scores", JSON.stringify(scores));
-    }
-
-    function loadLeaderboard() {
-      let scores = JSON.parse(localStorage.getItem("kakarot_click_scores") || "[]");
-      scores = scores.filter(s => (Date.now() - s.date) < 7*24*60*60*1000);
-      scores.sort((a,b) => b.score - a.score);
-      scores = scores.slice(0,10);
-
-      leaderboardEl.innerHTML = "";
-      if(scores.length === 0) {
-        leaderboardEl.innerHTML = "<li>No records yet.</li>";
-        return;
-      }
-      scores.forEach(({address, score}, i) => {
-        leaderboardEl.innerHTML += `<li><strong>${i+1}.</strong> ${address.slice(0,6)}...${address.slice(-4)} - ${score} clicks</li>`;
-      });
-    }
+    });
 
     function startGame() {
-      if(!userAccount) {
-        alert("Please connect your wallet to play and record your clicks!");
-        return;
-      }
-      clickCount = 0;
-      timeLeft = gameDuration;
-      finalScoreEl.textContent = "";
-      gameInfo.textContent = `Time left: ${timeLeft}s`;
-      startBtn.style.display = "none";
-      clickBtn.style.display = "inline-block";
-      claimBtn.style.display = "none";
-      claimStatus.textContent = "";
+      clicks = 1;
+      gameStarted = true;
+      timeLeft = 54.0;
+      scoreDisplay.textContent = `Clicks: ${clicks}`;
+      clickButton.textContent = 'Click fast!';
+      clickButton.disabled = false;
 
-      timer = setInterval(() => {
-        timeLeft--;
-        gameInfo.textContent = `Time left: ${timeLeft}s`;
-        if(timeLeft <= 0) {
-          clearInterval(timer);
+      timerInterval = setInterval(() => {
+        timeLeft -= 0.1;
+        if (timeLeft <= 0) {
+          timeLeft = 0;
           endGame();
         }
-      }, 1000);
+        timerDisplay.textContent = `Time: ${timeLeft.toFixed(1)}s`;
+      }, 100);
     }
 
     function endGame() {
-      clickBtn.style.display = "none";
-      startBtn.style.display = "inline-block";
-      finalScoreEl.textContent = `Game over! You clicked ${clickCount} times.`;
+      clearInterval(timerInterval);
+      gameStarted = false;
+      clickButton.textContent = 'Start Game';
+      clickButton.disabled = false;
+      timerDisplay.textContent = `Time: 0.0s`;
+      scoreDisplay.textContent = `Final Clicks: ${clicks}`;
 
-      saveScore(userAccount, clickCount);
+      saveScore(clicks);
       loadLeaderboard();
-
-      let scores = JSON.parse(localStorage.getItem("kakarot_click_scores") || "[]");
-      scores = scores.filter(s => (Date.now() - s.date) < 7*24*60*60*1000);
-      scores.sort((a,b) => b.score - a.score);
-      const rank = scores.findIndex(s => s.address === userAccount && s.score === clickCount) + 1;
-
-      if(rank > 0 && rank <= 10) {
-        claimBtn.style.display = "inline-block";
-        claimStatus.textContent = `Congrats! You're in the weekly top ${rank}. You can claim your tokens!`;
-        claimStatus.style.color = "#00ff88";
-      } else {
-        claimBtn.style.display = "none";
-        claimStatus.textContent = `You're not in the top 10 yet. Keep trying!`;
-        claimStatus.style.color = "#f44336";
-      }
     }
 
-    connectWalletBtn.addEventListener("click", connectWallet);
-    startBtn.addEventListener("click", startGame);
-    clickBtn.addEventListener("click", () => {
-      clickCount++;
-    });
+    // Simple leaderboard saved in localStorage (simulate weekly leaderboard)
+    // In real project, this should be backend-based with smart contract interaction
 
-    claimBtn.addEventListener("click", async () => {
-      claimBtn.disabled = true;
-      claimStatus.textContent = "Processing claim...";
-      try {
-        // TODO: Integrate with real smart contract claim function here
-        await new Promise(r => setTimeout(r, 2000)); // Simulate delay
-        claimStatus.textContent = "Tokens claimed successfully! 💥";
-      } catch (e) {
-        claimStatus.textContent = "Claim failed: " + e.message;
+    function saveScore(clicks) {
+      const player = getWalletAddress() || 'Anonymous';
+      const leaderboard = JSON.parse(localStorage.getItem('kakarot_leaderboard') || '[]');
+
+      const now = Date.now();
+      // Remove entries older than 7 days
+      const oneWeekAgo = now - 7 * 24 * 60 * 60 * 1000;
+      const filtered = leaderboard.filter(entry => entry.timestamp > oneWeekAgo);
+
+      filtered.push({ player, clicks, timestamp: now });
+      filtered.sort((a, b) => b.clicks - a.clicks);
+
+      // Keep only top 10
+      const top10 = filtered.slice(0, 10);
+
+      localStorage.setItem('kakarot_leaderboard', JSON.stringify(top10));
+    }
+
+    function loadLeaderboard() {
+      const leaderboard = JSON.parse(localStorage.getItem('kakarot_leaderboard') || '[]');
+
+      if (leaderboard.length === 0) {
+        leaderboardDiv.textContent = 'No scores yet. Be the first!';
+        return;
       }
-      claimBtn.disabled = false;
+
+      const html = leaderboard
+        .map(
+          (entry, i) =>
+            `<div><strong>#${i + 1}</strong> ${entry.player.substring(0, 10)}... — ${entry.clicks} clicks</div>`
+        )
+        .join('');
+      leaderboardDiv.innerHTML = html;
+    }
+
+    loadLeaderboard();
+
+    // METAMASK WALLET INTEGRATION
+
+    const connectWalletBtn = document.getElementById('connect-wallet-btn');
+    const claimBtn = document.getElementById('claim-btn');
+    const walletAddressDiv = document.getElementById('wallet-address');
+    const statusMessageDiv = document.getElementById('status-message');
+
+    let userAddress = null;
+    let provider, signer;
+
+    connectWalletBtn.addEventListener('click', async () => {
+      if (!window.ethereum) {
+        alert('MetaMask is required to connect wallet!');
+        return;
+      }
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        signer = provider.getSigner();
+        userAddress = await signer.getAddress();
+        walletAddressDiv.textContent = `Connected: ${userAddress}`;
+        connectWalletBtn.disabled = true;
+        claimBtn.disabled = false;
+        statusMessageDiv.textContent = 'Wallet connected. Ready to claim tokens.';
+      } catch (err) {
+        console.error(err);
+        statusMessageDiv.textContent = 'Wallet connection failed.';
+      }
     });
 
+    claimBtn.addEventListener('click', async () => {
+      if (!userAddress) {
+        statusMessageDiv.textContent = 'Connect wallet first.';
+        return;
+      }
+      // Example claim logic — here, simulate successful claim:
+      statusMessageDiv.textContent = 'Claiming tokens...';
+      claimBtn.disabled = true;
+
+      setTimeout(() => {
+        statusMessageDiv.textContent = 'Tokens claimed successfully! 🚀';
+        claimBtn.disabled = false;
+      }, 2000);
+    });
+
+    function getWalletAddress() {
+      return userAddress;
+    }
   </script>
 </body>
 </html>
