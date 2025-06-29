@@ -207,6 +207,25 @@
       background-color: #00cc6a !important;
       box-shadow: 0 0 12px #00cc6a !important;
     }
+
+    /* Canvas & game styles */
+    #game-container {
+      margin-top: 3rem;
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      border-radius: 14px;
+      box-shadow: 0 0 20px #facc15aa;
+      background: #111;
+      user-select: none;
+    }
+    canvas {
+      width: 100%;
+      height: 300px;
+      display: block;
+      border-radius: 14px;
+      background: black;
+    }
   </style>
 </head>
 <body>
@@ -221,7 +240,7 @@
     <a href="https://t.me/kamecoinsquad" class="btn" target="_blank">Join Telegram</a>
     <button onclick="playSound()" class="btn">💥 Power Up!</button>
     <button onclick="toggleSaiyan()" class="btn">⚡ Super Saiyan Mode</button>
-    
+
     <div class="section">
       <h2>📖 Why We Created $KAKAROT</h2>
       <div class="history-box">
@@ -270,6 +289,11 @@
       <p id="claim-status"></p>
     </div>
 
+    <!-- Game container -->
+    <div id="game-container">
+      <canvas id="game-canvas" width="600" height="300"></canvas>
+    </div>
+
     <div class="socials">
       <a href="https://t.me/kamecoinsquad" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" />
@@ -288,6 +312,8 @@
   <footer>
     Made with 💛 by the $KAKAROT Dojo
   </footer>
+
+  <audio id="dbzSound" src="https://www.soundjay.com/misc/sounds/kamehameha-1.mp3"></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/web3@1.9.0/dist/web3.min.js"></script>
   <script>
@@ -373,6 +399,80 @@
 
     connectBtn.addEventListener("click", connectWallet);
     claimBtn.addEventListener("click", claimTokens);
+
+    // --------- Game Script ---------
+
+    const canvas = document.getElementById("game-canvas");
+    const ctx = canvas.getContext("2d");
+
+    const player = {
+      x: 50,
+      y: 150,
+      width: 80,
+      height: 150,
+      frame: 0,
+      frameCount: 4,
+      frameDelay: 5,
+      frameTimer: 0,
+      color: "#00ff88",
+    };
+
+    let kamehameha = null;
+
+    function drawPlayer() {
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+
+      // Simple animation frame timer
+      player.frameTimer++;
+      if (player.frameTimer >= player.frameDelay) {
+        player.frame++;
+        player.frameTimer = 0;
+        if (player.frame >= player.frameCount) player.frame = 0;
+      }
+
+      // Draw "face" for fun
+      ctx.fillStyle = "#000";
+      ctx.fillRect(player.x + 20, player.y + 40, 20, 20); // eyes
+      ctx.fillRect(player.x + 40, player.y + 40, 20, 20);
+    }
+
+    function drawKamehameha() {
+      if (!kamehameha) return;
+      ctx.fillStyle = "#00ccff";
+      ctx.beginPath();
+      ctx.ellipse(kamehameha.x, kamehameha.y, 20, 10, 0, 0, 2 * Math.PI);
+      ctx.fill();
+
+      // Move it to the right
+      kamehameha.x += kamehameha.speed;
+      if (kamehameha.x > canvas.width + 50) {
+        kamehameha = null;
+      }
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPlayer();
+      drawKamehameha();
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Shoot kamehameha on button click
+    function shootKamehameha() {
+      if (!kamehameha) {
+        kamehameha = {
+          x: player.x + player.width,
+          y: player.y + player.height / 2,
+          speed: 10,
+        };
+        playSound();
+      }
+    }
+
+    document.querySelector('button.btn[onclick="playSound()"]').addEventListener("click", shootKamehameha);
+
+    gameLoop();
   </script>
 </body>
 </html>
