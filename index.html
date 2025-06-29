@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>$KAKAROT – Unleash the Saiyan Spirit</title>
 
+  <!-- Fonte moderna -->
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;800&display=swap" rel="stylesheet">
 
   <style>
@@ -20,7 +21,6 @@
       background-color: #000;
       color: white;
       overflow-x: hidden;
-      transition: background 0.4s ease;
     }
 
     .marquee-container {
@@ -44,7 +44,7 @@
     }
 
     @keyframes scrollText {
-      0% { transform: translateX(0); }
+      0%   { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
 
@@ -92,7 +92,6 @@
       font-weight: bold;
       transition: transform 0.2s ease, background 0.2s ease;
       box-shadow: 0 0 12px #8a2be2;
-      cursor: pointer;
     }
 
     .btn:hover {
@@ -120,8 +119,7 @@
       font-size: 0.7rem;
     }
 
-    .history-box,
-    .roadmap-box {
+    .history-box {
       max-height: 200px;
       overflow-y: auto;
       padding-right: 10px;
@@ -170,18 +168,68 @@
       padding: 1.5rem 1rem 2rem;
     }
 
-    #dojoGame {
-      margin-top: 2rem;
-      padding: 1rem;
-      background: #111;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #facc15;
+    .roadmap-box {
+      max-height: 220px;
+      overflow-y: auto;
+      text-align: left;
+      padding-right: 10px;
+    }
+
+    .fun-roadmap {
+      list-style: none;
+      padding: 0;
       font-size: 0.7rem;
     }
 
-    .powerup-mode {
-      background-color: #111;
-      box-shadow: inset 0 0 50px #00ff88;
+    .fun-roadmap li {
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 1.4rem;
+    }
+
+    .fun-roadmap li span {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .bar {
+      height: 6px;
+      border-radius: 10px;
+      margin-top: 5px;
+      background: #333;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      animation: fillBar 2s forwards;
+    }
+
+    .bar.done::before {
+      background: #00ff88;
+      width: 100%;
+    }
+
+    .bar.in-progress::before {
+      background: #facc15;
+      width: 60%;
+    }
+
+    .bar.future::before {
+      background: #555;
+      width: 20%;
+    }
+
+    @keyframes fillBar {
+      from { width: 0; }
+      to { width: inherit; }
     }
   </style>
 </head>
@@ -196,7 +244,7 @@
     <p>🔥 The Legend of the Saiyan Begins!<br>Join the Kakarot Clan. Become a meme warrior in the crypto universe.</p>
 
     <a href="https://t.me/kamecoinsquad" class="btn" target="_blank">Join Telegram</a>
-    <button onclick="powerUp()" class="btn">💥 Power Up!</button>
+    <button onclick="playSound()" class="btn">💥 Power Up!</button>
 
     <audio id="dbzSound">
       <source src="over9000.mp3" type="audio/mpeg">
@@ -215,36 +263,30 @@
     <div class="section">
       <h2>📊 Tokenomics</h2>
       <ul>
-        <li>Total Supply: 59,000,000,000,000,000,000 $KAKAROT (yes, 18 zeros)</li>
-        <li>100% Community Owned (even Goku doesn’t hold dev tokens)</li>
-        <li>LP Burned 🔥</li>
-        <li>Contract Renounced 📜</li>
-        <li>Taxes: 2% Buy / 2% Sell – used to fuel Senzu Beans 🍃</li>
+        <li>Total Supply: 59,000,000,000,000,000,000 $KAKAROT</li>
+        <li>100% Community Owned</li>
+        <li>LP Burned, Contract Renounced</li>
       </ul>
     </div>
 
     <div class="section">
       <h2>🗺️ Roadmap</h2>
       <div class="roadmap-box">
-        <ul>
-          <li>✅ Launch $KAKAROT into the crypto stratosphere</li>
-          <li>✅ Build a clan on Telegram & Twitter</li>
-          <li>✅ First Kamehameha Meme Contest</li>
-          <li>🔜 Listing on CoinGecko & DEXTools</li>
-          <li>🔜 NFT Drop: “Super Saiyan Club”</li>
-          <li>🔜 Staking Dojo (train to earn)</li>
-          <li>🔜 Fusion Events (partner tokens unite!)</li>
-          <li>🔜 KAKAROT Mini Game Battles</li>
-          <li>🔜 Merch Launch: “It’s Over 9000!” Edition</li>
+        <ul class="fun-roadmap">
+          <li><span>✅</span> Launch $KAKAROT – Goku screamed, blockchain answered. <div class="bar done"></div></li>
+          <li><span>✅</span> Website Live – Powered by pure Saiyan coding. <div class="bar done"></div></li>
+          <li><span>✅</span> Telegram On Fire – The Kakarot Clan has awakened. <div class="bar done"></div></li>
+          <li><span>✅</span> Contract Renounced – Freeza can’t touch this. <div class="bar done"></div></li>
+          <li><span>🚀</span> DEXTools & CoinGecko Listings – Kamehame-HYPE. <div class="bar in-progress"></div></li>
+          <li><span>🎭</span> Meme Contest – Winner gets a Senzu Bean. <div class="bar in-progress"></div></li>
+          <li><span>🎨</span> NFT Drop – Shirtless Goku (for culture). <div class="bar future"></div></li>
+          <li><span>🎮</span> Kamehameha Game – Press F to power up. <div class="bar future"></div></li>
+          <li><span>🐦</span> Elon Musk Tweet – Saiyan-level marketing. <div class="bar future"></div></li>
+          <li><span>👘</span> Cosplay Tournament – Real screams, digital glory. <div class="bar future"></div></li>
+          <li><span>📈</span> CEX Listings – Binance or bust. <div class="bar future"></div></li>
+          <li><span>🌕</span> Moon Mission – Goku’s already there. Now it's our turn. <div class="bar future"></div></li>
         </ul>
       </div>
-    </div>
-
-    <div id="dojoGame">
-      <h2>🥋 Dojo Mini Game</h2>
-      <p>Click to Train Your Saiyan Power Level 💪</p>
-      <p><strong>Power Level:</strong> <span id="power">0</span></p>
-      <button class="btn" onclick="train()">Train 🥊</button>
     </div>
 
     <div class="socials">
@@ -266,14 +308,7 @@
   </footer>
 
   <script>
-    let powerLevel = 0;
-    function train() {
-      powerLevel += Math.floor(Math.random() * 100) + 1;
-      document.getElementById('power').innerText = powerLevel;
-    }
-
-    function powerUp() {
-      document.body.classList.toggle('powerup-mode');
+    function playSound() {
       document.getElementById('dbzSound').play();
     }
   </script>
